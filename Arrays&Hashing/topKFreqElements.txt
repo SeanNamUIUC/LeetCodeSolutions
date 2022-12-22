@@ -1,0 +1,33 @@
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int> result;
+        unordered_map<int, int> _map; // par1:num, par2:num of elems
+        for(int i = 0; i < nums.size(); ++i) {
+            if(_map.find(nums.at(i)) == _map.end()) {
+                _map.insert(pair<int, int>(nums.at(i), 1));
+            } else {
+                _map.at(nums.at(i))++;
+            }
+        }
+        //finished putting into map
+
+        int total = 0;
+        while(total != k) {
+            int num = 0;//num
+            int freq = 0;//frequency of num
+            for(auto it = _map.begin(); it != _map.end(); ++it) {
+                if(it->second > freq) {
+                    num = it->first;
+                    freq = it->second;
+                }
+            }
+            result.push_back(num);
+            _map.erase(num);
+            total++;
+        }
+        return result;
+
+    }
+};
