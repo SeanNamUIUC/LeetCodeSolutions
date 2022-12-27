@@ -1,0 +1,37 @@
+//get left and right pointer to check whether it's alphanumeric and make it lowercase to compare it.
+
+
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        if(s.length() == 0) {
+            return true;
+        }
+        int left = 0;
+        int right = s.length() - 1;
+
+        while(left <= right) {
+            char leftChar;
+            char rightChar;
+            if(isalnum(s.at(left))) {
+                leftChar = tolower(s.at(left));
+            } else {
+                left++;
+                continue;
+            }
+            if(isalnum(s.at(right))) {
+                rightChar = tolower(s.at(right));
+            } else {
+                right--;
+                continue;
+            }
+            if(leftChar != rightChar) {
+                return false;
+            } else {
+                left++;
+                right--;
+            }
+        }
+        return true;
+    }       
+};
