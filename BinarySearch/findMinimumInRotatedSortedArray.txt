@@ -1,0 +1,33 @@
+//I was able to find out that only 3cases could happen in this situation.
+//1. mid smaller than left and right, 2. mid bigger than left and right, 3. mid bigger than left and smaller than right.
+
+
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int left = 0;
+        int right = nums.size() - 1;
+        if(nums[left] < nums[right]) {
+            return nums[left];
+        }
+        while(left < right) {
+            cout << "left is " << left << "right is " << right << endl;
+            int mid = (left + right) / 2; //mid idx
+            cout << "mid is " << mid << endl;
+            if((nums[mid] < nums[left]) && (nums[mid] < nums[right])) {
+                right = mid;
+            } else if((nums[mid] < nums[left]) && (nums[mid] < nums[right])){
+                left = mid;
+            } else {
+                //nums[left] < nums[mid] && nums[mid] < nums[right]
+                left = mid;
+            }
+            
+
+            if(left + 1 == right) {
+                break;
+            }
+        }
+        return nums[right];
+    }
+};
